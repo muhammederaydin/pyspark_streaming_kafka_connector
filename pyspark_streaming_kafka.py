@@ -1,5 +1,5 @@
 import findspark
-findspark.init("/home/gtusr0070/Apache-Spark/spark-2.4.4-bin-hadoop2.7/")
+findspark.init("path_to_your_spark")
 
 from pyspark.sql import SparkSession
 from pyspark import SparkContext
@@ -37,9 +37,9 @@ class CEPExample(object):
         _ssc = self._create_streaming(appName="CEP", window_time=60)
         _kafka_ssc = self._create_kafka_stream(
             _ssc,
-            "10.0.0.46:2181",
+            "127.0.0.1:2181",
             "spark-streaming",
-            {"crm-engine": 1}
+            {"test": 1}
         )
         parsed = _kafka_ssc.map(lambda v: json.loads(v[1]))
         parsed.pprint()
